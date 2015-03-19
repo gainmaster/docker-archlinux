@@ -9,7 +9,6 @@ This repository contains a **Dockerfile** for an Arch Linux docker image, a **Va
 [docker_hub_repository]: https://registry.hub.docker.com/u/bachelorthesis/archlinux/
 [docker_hub_base_image]: https://registry.hub.docker.com/_/scratch/
 
-
 ## Resources
 
 These resources have been helpful when creating this repository:
