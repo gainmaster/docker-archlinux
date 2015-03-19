@@ -1,0 +1,8 @@
+.vagrant/
+.git/
+.gitattributes
+.gitignore
+builder/
+scripts/
+README.md
+Vagrantfile
