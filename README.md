@@ -1,5 +1,7 @@
 # Docker Arch Linux
 
+[![Build Status](http://jenkins.hesjevik.im/job/docker-archlinux/badge/icon)](http://jenkins.hesjevik.im/job/docker-archlinux/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg)](https://registry.hub.docker.com/u/bachelorthesis/archlinux/)
+
 This repository contains a **Dockerfile** for an Arch Linux docker image, a **Vagrantfile** for local development, and **shell scripts** for easy startup of container taks. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
 
 **Base image:** [scratch][docker_hub_base_image]
