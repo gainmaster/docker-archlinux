@@ -8,12 +8,6 @@ setup() {
   [ "$output" = "UTC" ]
 }
 
-@test "pacman mirror list is correct" {
-  run docker run bachelorthesis/archlinux cat /etc/pacman.d/mirrorlist
-  [ $status -eq 0 ]
-  [ "${lines[0]}" = "Server = http://mirror.archlinux.no/$repo/os/$arch" ]
-}
-
 @test "pacman cache is empty" {
   run docker run bachelorthesis/archlinux bash -c "ls -1 /var/cache/pacman/pkg | wc -l"
   [ $status -eq 0 ]
