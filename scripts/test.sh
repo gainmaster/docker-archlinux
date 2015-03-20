@@ -9,7 +9,7 @@ cd $(dirname "${BASH_SOURCE[0]}") && cd ../
 declare IMAGE_NAME="bachelorthesis/archlinux"
 
 test() {
-	docker run --rm "$IMAGE_NAME" echo "Success!"
+    bats "tests/archlinux.bats"
 }
 
 if [[ -z $(which docker) ]]; then
