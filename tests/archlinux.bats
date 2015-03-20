@@ -11,10 +11,7 @@ setup() {
 @test "pacman mirror list is correct" {
   run docker run bachelorthesis/archlinux cat /etc/pacman.d/mirrorlist
   [ $status -eq 0 ]
-  [ 
-    "${lines[0]}" = "Server = http://mirror.archlinux.no/$repo/os/$arch" 
-    "${lines[1]}" = "Server = http://mirrors.kernel.org/archlinux/$repo/os/$arch" 
-  ]
+  [ "${lines[0]}" = "Server = http://mirror.archlinux.no/$repo/os/$arch" ]
 }
 
 @test "pacman cache is empty" {
