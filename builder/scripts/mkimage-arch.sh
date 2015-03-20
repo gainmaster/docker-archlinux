@@ -14,23 +14,23 @@ echo "[mkimage-arch.sh]: Building Arch Linux rootfs."
 
 cd $(dirname "${BASH_SOURCE[0]}")
 
-#mkdir -p /run/shm
+mkdir -p /run/shm
 
-#if ! mountpoint -q /sys/fs/cgroup; then
-#  mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
-#fi
+if ! mountpoint -q /sys/fs/cgroup; then
+  mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
+fi
 
-#(
-#cd /sys/fs/cgroup
-#for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
-#  mkdir -p $sys
-#  if ! mountpoint -q $sys; then
-#    if ! mount -n -t cgroup -o $sys cgroup $sys; then
-#      rmdir $sys || true
-#    fi
-#  fi
-#done
-#)
+(
+cd /sys/fs/cgroup
+for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
+  mkdir -p $sys
+  if ! mountpoint -q $sys; then
+    if ! mount -n -t cgroup -o $sys cgroup $sys; then
+      rmdir $sys || true
+    fi
+  fi
+done
+)
 
 # Update pacman and install required packages
 rm -f /var/lib/pacman/db.lck
