@@ -9,7 +9,7 @@ cd $(dirname "${BASH_SOURCE[0]}") && cd ../
 declare IMAGE_NAME="bachelorthesis/archlinux"
 
 ship() {
-	docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+	docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD && \
 	docker push "$IMAGE_NAME"
 }
 
