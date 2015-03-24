@@ -13,8 +13,3 @@ setup() {
   [ $status -eq 0 ]
   [ "$output" = "0" ]
 }
-
-@test "package installs cleanly" {
-  run docker run bachelorthesis/archlinux pacman-install openssl
-  [ $status -eq 0 ]
-}
