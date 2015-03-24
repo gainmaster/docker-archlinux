@@ -10,7 +10,7 @@ if [[ -z $(which docker) ]]; then
 fi
 
 # Set working directory to project root
-cd $(dirname "${BASH_SOURCE[0]}") && cd ../
+cd $(dirname "${BASH_SOURCE[0]}")
 
 # Declarations
 declare BUILDER_IMAGE="archlinux-builder"
