@@ -1,5 +1,5 @@
 setup() {
-  run docker run --name archlinux bachelorthesis/archlinux  >/dev/null 2>&1
+  run docker run --name archlinux bachelorthesis/archlinux tail -f var/log/pacman.log #>/dev/null 2>&1
 }
 
 @test "package installs cleanly" {
@@ -19,5 +19,6 @@ setup() {
 }
 
 teardown() {
+  docker kill archlinux
   docker rm archlinux
 }
