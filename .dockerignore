@@ -3,6 +3,7 @@
 .gitattributes
 .gitignore
 builder/
-scripts/
+test/
+build
 README.md
 Vagrantfile

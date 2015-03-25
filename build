@@ -13,17 +13,18 @@ fi
 cd $(dirname "${BASH_SOURCE[0]}")
 
 # Declarations
-declare BUILDER_IMAGE="archlinux-builder"
-declare BUILDER_CONTAINER="archlinux-builder-container"
+declare BUILDER_IMAGE="archlinux-rootfs-builder"
+declare BUILDER_CONTAINER="archlinux-rootfs-builder-container"
 declare IMAGE_NAME="bachelorthesis/archlinux"
 
-# if not run as root user, docker needs sudo
+# If script is not run as root user, docker needs sudo
 if [[ $EUID -ne 0 ]]; then
     alias docker='sudo docker'
 fi
 
 # Build arch root filesystem
 function make_rootfs {
+    rm -f arch-rootfs.tar.xz
     docker build -t $BUILDER_IMAGE ./builder
     docker run --privileged --name $BUILDER_CONTAINER $BUILDER_IMAGE
     docker cp $BUILDER_CONTAINER:/opt/shared/arch-rootfs.tar.xz ./
@@ -43,10 +44,12 @@ function build {
 # Test docker image
 function test {
 	docker history $IMAGE_NAME 2> /dev/null
+
     if [ $? -eq 1 ]; then
         echo "Cant test $IMAGE_NAME, the image does not exist."
         exit 2
     fi
+
     for test_file in test/*; do 
         bats $test_file    
     done
