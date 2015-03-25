@@ -7,7 +7,7 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
 
 Vagrant.configure("2") do |config|
 
-  config.vm.define "docker-archlinux" do |v|
+  config.vm.define "archlinux" do |v|
     v.vm.provider "docker" do |d|
       # Docker image properties
       d.build_dir       = "."
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define "docker-archlinux-builder", autostart: false do |v|
+  config.vm.define "archlinux-builder", autostart: false do |v|
     v.vm.provider "docker" do |d|
       # Docker image definition
       d.build_dir       = "./builder"
