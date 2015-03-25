@@ -68,8 +68,8 @@ function push {
     [ -z "$DOCKER_USER" ]     && { echo "Need to set DOCKER_USER";     exit 1; }
     [ -z "$DOCKER_PASSWORD" ] && { echo "Need to set DOCKER_PASSWORD"; exit 1; }
 
-    docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
-    docker push $IMAGE_NAME
+    sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+    sudo docker push $IMAGE_NAME
 }
 
 # Handle user input, if no arguments are given, run all functions.
