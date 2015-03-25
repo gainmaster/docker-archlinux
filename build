@@ -49,10 +49,9 @@ function test {
         echo "Cant test $IMAGE_NAME, the image does not exist."
         exit 2
     fi
-
-    for test_file in test/*; do 
-        bats $test_file    
-    done
+    
+    #Run tests
+    bats test/
 }
 
 # Push docker image to docker hub
