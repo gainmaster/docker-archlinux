@@ -3,26 +3,19 @@
 set -x              # Print command traces before executing command
 trap 'exit 1' ERR   # Exit script with error if command fails
 
-# Validate that docker exists
+cd $(dirname "${BASH_SOURCE[0]}")
+
 if [[ -z $(which docker) ]]; then
     echo "Missing docker client which is required for building, testing and pushing."
     exit 2
 fi
 
-# Set working directory to project root
-cd $(dirname "${BASH_SOURCE[0]}")
 
-# Declarations
 declare BUILDER_IMAGE="archlinux-rootfs-builder"
 declare BUILDER_CONTAINER="archlinux-rootfs-builder-container"
 declare IMAGE_NAME="bachelorthesis/archlinux"
 
-# If script is not run as root user, docker needs sudo
-if [[ $EUID -ne 0 ]]; then
-    alias docker='sudo docker'
-fi
 
-# Build arch root filesystem
 function make_rootfs {
     rm -f arch-rootfs.tar.xz
     docker build -t $BUILDER_IMAGE ./builder
@@ -32,7 +25,7 @@ function make_rootfs {
     docker rmi $BUILDER_IMAGE
 }
 
-# Build docker image
+
 function build {
     if [ ! -f arch-rootfs.tar.xz ]; then
         echo "Need arch-rootfs.tar.xz to build docker image."
@@ -41,7 +34,7 @@ function build {
     docker build -t $IMAGE_NAME .
 }
 
-# Test docker image
+
 function test {
 	docker history $IMAGE_NAME 2> /dev/null
 
@@ -49,12 +42,11 @@ function test {
         echo "Cant test $IMAGE_NAME, the image does not exist."
         exit 2
     fi
-    
-    #Run tests
+
     bats test/
 }
 
-# Push docker image to docker hub
+
 function push {
 	docker history $IMAGE_NAME 2> /dev/null
 
@@ -67,13 +59,22 @@ function push {
     [ -z "$DOCKER_USER" ]     && { echo "Need to set DOCKER_USER";     exit 1; }
     [ -z "$DOCKER_PASSWORD" ] && { echo "Need to set DOCKER_PASSWORD"; exit 1; }
 
-    sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
-    sudo docker push $IMAGE_NAME
+    if [[ $EUID -ne 0 ]]; then
+        sudo docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+        sudo docker push $IMAGE_NAME
+    else
+        docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASSWORD
+        docker push $IMAGE_NAME
+    fi
 }
 
-# Handle user input, if no arguments are given, run all functions.
-# Valid arguments are: make_rootfs, build, test and push
+
+#
+# Handle input
+#
+
 actions=("$@")
+
 if [ ${#actions[@]} -eq 0 ]; then
     actions=(make_rootfs build test push)
 fi
@@ -95,9 +96,5 @@ for action in "${actions[@]}"; do
         push)
             push
             ;;
-         
-        *)
-            echo $"Usage: $0 {make_rootfs || build || test || push}"
-            exit 1
     esac
 done
