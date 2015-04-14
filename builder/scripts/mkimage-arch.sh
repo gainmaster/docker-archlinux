@@ -75,6 +75,7 @@ echo 'en_US.UTF-8 UTF-8' > $ROOTFS/etc/locale.gen
 arch-chroot $ROOTFS locale-gen
 cat /tmp/pacman-mirrorlist > $ROOTFS/etc/pacman.d/mirrorlist
 mv /tmp/pacman-install $ROOTFS/usr/bin/pacman-install
+mv /tmp/add-sudo-user $ROOTFS/usr/bin/add-sudo-user
 
 # Rebuild dev (udev doesn't work in containers)
 DEV=$ROOTFS/dev
