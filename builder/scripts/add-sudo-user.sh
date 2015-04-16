@@ -10,5 +10,5 @@ for username in "$@"; do
     useradd -G wheel -s /usr/bin/bash -U $username && passwd -d $username
     mkdir /home/$username
     chown $username:$username /home/$username 
-    chmod 705 /home/$username
+    chmod 755 /home/$username
 done
