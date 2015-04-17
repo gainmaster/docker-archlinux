@@ -1,9 +1,0 @@
-.vagrant/
-.git/
-.gitattributes
-.gitignore
-builder/
-test/
-build
-README.md
-Vagrantfile

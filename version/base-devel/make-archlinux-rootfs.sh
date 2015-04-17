@@ -12,8 +12,6 @@ set -e
 
 echo "[mkimage-arch.sh]: Building Arch Linux rootfs."
 
-cd $(dirname "${BASH_SOURCE[0]}")
-
 mkdir -p /run/shm
 
 if ! mountpoint -q /sys/fs/cgroup; then
@@ -50,7 +48,7 @@ echo "point 1"
 expect << EOF
   set timeout 600
   set send_slow {1 1}
-  spawn pacstrap -C /tmp/pacman.conf -c -d -G -i $ROOTFS base bash haveged --ignore $PKGIGNORE
+  spawn pacstrap -C /etc/pacman.conf -c -d -G -i $ROOTFS base bash haveged --ignore $PKGIGNORE
   expect {
     "Install anyway?" { sleep 1; send n\r; exp_continue }
     "(default=all)" { sleep 1; send \r; exp_continue }
@@ -67,15 +65,14 @@ touch $ROOTFS/etc/resolv.conf
 echo "point 2"
 
 # Cleanup after pacstrap
-arch-chroot $ROOTFS sh -c "haveged -w 1024; pacman-key --init; pkill haveged; pacman -Rs --noconfirm haveged; pacman-key --populate archlinux; pkill gpg-agent"
+arch-chroot $ROOTFS /bin/sh -c "haveged -w 1024; pacman-key --init; pkill haveged; pacman -Rs --noconfirm haveged; pacman-key --populate archlinux; pkill gpg-agent"
 
 # Configure system
 arch-chroot $ROOTFS /bin/sh -c "ln -s /usr/share/zoneinfo/UTC /etc/localtime"
 echo 'en_US.UTF-8 UTF-8' > $ROOTFS/etc/locale.gen
 arch-chroot $ROOTFS locale-gen
-cat /tmp/pacman-mirrorlist > $ROOTFS/etc/pacman.d/mirrorlist
-mv /tmp/pacman-install $ROOTFS/usr/bin/pacman-install
-mv /tmp/add-sudo-user $ROOTFS/usr/bin/add-sudo-user
+arch-chroot $ROOTFS /bin/sh -c 'echo "Server = https://mirrors.kernel.org/archlinux/\$repo/os/\$arch" > /etc/pacman.d/mirrorlist'
+
 
 # Rebuild dev (udev doesn't work in containers)
 DEV=$ROOTFS/dev
@@ -96,9 +93,7 @@ mknod -m 666 $DEV/ptmx c 5 2
 ln -sf /proc/self/fd $DEV/fd
 
 # Compress rootfs
-rm -rf /opt/shared/arch-rootfs.tar.xz
-mkdir -p /opt/shared
-tar --xz -f /opt/shared/arch-rootfs.tar.xz --numeric-owner -C $ROOTFS -c . 
-rm -rf $ROOTFS
+rm -rf ./archlinux-rootfs.tar.xz
+tar --xz -f ./archlinux-rootfs.tar.xz --numeric-owner -C $ROOTFS -c . 
 
 echo "[mkimage-arch.sh]: Image build completed."

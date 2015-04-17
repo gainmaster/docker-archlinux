@@ -1,6 +1,2 @@
-.vagrant/
-nbproject
-.idea
-*.iml
 .DS_Store
-arch-rootfs.tar.xz
+archlinux-rootfs.tar.xz
