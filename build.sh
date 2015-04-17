@@ -9,7 +9,7 @@ fi
 
 declare SCRIPT_DIRECTORY=$(dirname "${BASH_SOURCE[0]}")
 declare IMAGE_NAME="bachelorthesis/archlinux"
-declare VERSION_DIRECTORY="./version"
+declare VERSION_DIRECTORY="${SCRIPT_DIRECTORY}/version"
 
 cd $SCRIPT_DIRECTORY
 
@@ -26,7 +26,7 @@ function build {
         if [ ! -f "$directory/archlinux-rootfs.tar.xz" ]; then
             echo "Need to build archlinux root filesystem"
             cd $directory
-            ./utility/archlinux-rootfs-builder.sh
+            $SCRIPT_DIRECTORY/utility/archlinux-rootfs-builder.sh
             cd $SCRIPT_DIRECTORY
         fi
     fi
