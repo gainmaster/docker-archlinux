@@ -2,16 +2,16 @@
 
 trap 'exit 1' ERR   # Exit script with error if command fails
 
-cd $(dirname "${BASH_SOURCE[0]}")
-
 if [[ -z $(which docker) ]]; then
     echo "Missing docker client which is required for building, testing and pushing"
     exit 3
 fi
 
+declare SCRIPT_DIRECTORY=$(dirname "${BASH_SOURCE[0]}")
 declare IMAGE_NAME="bachelorthesis/archlinux"
 declare VERSION_DIRECTORY="./version"
 
+cd $SCRIPT_DIRECTORY
 
 function build {
 	version="${1}"
@@ -25,7 +25,9 @@ function build {
     if [ "$version" == "base" ]; then
         if [ ! -f "$directory/archlinux-rootfs.tar.xz" ]; then
             echo "Need to build archlinux root filesystem"
+            cd $directory
             ./utility/archlinux-rootfs-builder.sh
+            cd $SCRIPT_DIRECTORY
         fi
     fi
 
