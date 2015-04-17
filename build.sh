@@ -7,7 +7,7 @@ if [[ -z $(which docker) ]]; then
     exit 3
 fi
 
-declare SCRIPT_DIRECTORY=$(dirname "${BASH_SOURCE[0]}")
+declare SCRIPT_DIRECTORY=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 declare IMAGE_NAME="bachelorthesis/archlinux"
 declare VERSION_DIRECTORY="${SCRIPT_DIRECTORY}/version"
 
