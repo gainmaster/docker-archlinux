@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-pacman -Sy --noconfirm "$@" && rm -Rf /var/cache/pacman/pkg/*
+if [[ $EUID -ne 0 ]]; then
+    sudo pacman -Sy --noconfirm "$@" && rm -Rf /var/cache/pacman/pkg/*
+else
+    pacman -Sy --noconfirm "$@" && rm -Rf /var/cache/pacman/pkg/*
+fi
