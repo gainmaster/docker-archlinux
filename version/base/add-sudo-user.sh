@@ -13,9 +13,12 @@ fi
 USERNAME=$1
 SHELL=${2:-"/usr/bin/bash"}
 
-useradd -s $SHELL -U $USERNAME
-mkdir /home/$USERNAME
-chown $USERNAME:$USERNAME /home/$USERNAME 
-chmod 755 /home/$USERNAME
+echo $USERNAME
+echo $SHELL
 
-echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+#useradd -s $SHELL -U $USERNAME
+#mkdir /home/$USERNAME
+#chown $USERNAME:$USERNAME /home/$USERNAME 
+#chmod 755 /home/$USERNAME
+
+#echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers

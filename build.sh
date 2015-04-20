@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -x              # Print command traces before executing command
 trap 'exit 1' ERR   # Exit script with error if command fails
 
 if [[ -z $(which docker) ]]; then
@@ -49,7 +50,7 @@ function test {
 	docker history "${IMAGE_NAME}:${version}" 2> /dev/null
 
     if [ $? -eq 1 ]; then
-        echo "Cant test ${IMAGE_NAME}:${version}, the image is not built."
+        echo "Cant test ${IMAGE_NAME}:${version}, the image is not built"
         exit 2
     fi
 
@@ -68,7 +69,7 @@ function run {
     docker history "${IMAGE_NAME}:${version}" 2> /dev/null
 
     if [ $? -eq 1 ]; then
-        echo "Cant run ${IMAGE_NAME}:${version}, the image is not built."
+        echo "Cant run ${IMAGE_NAME}:${version}, the image is not built"
         exit 2
     fi
 
