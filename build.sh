@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x              # Print command traces before executing command
 trap 'exit 1' ERR   # Exit script with error if command fails
 
 if [[ -z $(which docker) ]]; then
@@ -24,12 +23,10 @@ function build {
     fi
 
     if [ "$version" == "base" ]; then
-        if [ ! -f "$directory/archlinux-rootfs.tar.xz" ]; then
-            echo "Need to build archlinux root filesystem"
-            cd $directory
-            $SCRIPT_DIRECTORY/utility/archlinux-rootfs-builder.sh
-            cd $SCRIPT_DIRECTORY
-        fi
+        rm -Rf $directory/archlinux-rootfs.tar.xz
+        cd $directory
+        $SCRIPT_DIRECTORY/utility/archlinux-rootfs-builder.sh
+        cd $SCRIPT_DIRECTORY
     fi
 
     while read tag; do

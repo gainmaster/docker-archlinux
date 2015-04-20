@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -x              # Print command traces before executing command
+
 WORKING_DIRECTORY=$(pwd)
 PROJECT_DIRECTORY=$(cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd)
 
