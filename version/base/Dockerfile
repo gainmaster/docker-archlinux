@@ -6,5 +6,7 @@ ADD archlinux-rootfs.tar.xz /
 COPY add-sudo-user.sh      /usr/local/bin/add-sudo-user
 COPY pacman-install.sh     /usr/local/bin/pacman-install
 COPY pacman-install-tar.sh /usr/local/bin/pacman-install-tar
+COPY aur-install.sh        /usr/local/bin/aur-install
+COPY aur-build-tar.sh      /usr/local/bin/aur-build-tar
 
 RUN add-sudo-user admin
