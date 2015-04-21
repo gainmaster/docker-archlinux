@@ -8,7 +8,7 @@ if [[ -z $(which docker) ]]; then
 fi
 
 declare SCRIPT_DIRECTORY=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
-declare IMAGE_NAME="bachelorthesis/archlinux"
+declare IMAGE_NAME="gainmaster/archlinux"
 declare VERSION_DIRECTORY="${SCRIPT_DIRECTORY}/version"
 
 cd $SCRIPT_DIRECTORY

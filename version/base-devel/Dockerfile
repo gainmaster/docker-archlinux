@@ -1,4 +1,4 @@
-FROM bachelorthesis/archlinux:base
+FROM gainmaster/archlinux:base
 MAINTAINER Tony Hesjevik <tony@hesjevik.no>
 
 RUN pacman-install base-devel

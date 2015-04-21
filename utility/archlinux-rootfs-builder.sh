@@ -9,6 +9,7 @@ if [[ ${WORKING_DIRECTORY} != ${PROJECT_DIRECTORY}* ]]; then
 fi
 
 DOCKER_WORKING_DIRECTORY=${WORKING_DIRECTORY#"$PROJECT_DIRECTORY"}
+
 [[ ! -z "$PS1" ]] && DOCKER_RUN_OPTIONS="-i -t"
 
 docker run $DOCKER_RUN_OPTIONS --rm \
@@ -16,4 +17,4 @@ docker run $DOCKER_RUN_OPTIONS --rm \
   -w="/project${DOCKER_WORKING_DIRECTORY}/" \
   --privileged \
   --entrypoint build-archlinux-rootfs \
-  bachelorthesis/archlinux:base-devel
+  gainmaster/archlinux:base-devel
