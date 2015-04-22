@@ -8,7 +8,7 @@ This repository contains a **Dockerfiles** for Arch Linux docker images. This re
 
 ## Docker Hub repository tags
 
-`ganmaster/archlinux` provides multiple tagged images:
+`gainmaster/archlinux` provides multiple tagged images:
 
 * `latest` : Alias to `base`
 * `base` : Arch Linux pacstraped with base group
