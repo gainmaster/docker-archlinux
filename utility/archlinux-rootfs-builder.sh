@@ -10,7 +10,7 @@ fi
 
 DOCKER_WORKING_DIRECTORY=${WORKING_DIRECTORY#"$PROJECT_DIRECTORY"}
 
-[[ -z "$PS1" ]] && DOCKER_RUN_OPTIONS="-i -t"
+[[ $- == *i* ]] && DOCKER_RUN_OPTIONS="-i -t" || DOCKER_RUN_OPTIONS=""
 
 docker run $DOCKER_RUN_OPTIONS --rm \
   -v $PROJECT_DIRECTORY:/project \
