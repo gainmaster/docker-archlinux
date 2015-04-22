@@ -1,17 +1,22 @@
 # Docker Arch Linux
 
-[![Build Status](http://jenkins.hesjevik.im/buildStatus/icon?job=docker-archlinux)](http://jenkins.hesjevik.im/job/docker-archlinux/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg?style=plastic)](https://registry.hub.docker.com/u/gainmaster/archlinux/)
+[![Build Status](http://ci.hesjevik.im/buildStatus/icon?job=docker-archlinux)](http://ci.hesjevik.im/job/docker-archlinux/) [![Docker Hub](https://img.shields.io/badge/docker-ready-blue.svg?style=plastic)][docker_hub_repository]
 
-This repository contains a **Dockerfile** for an Arch Linux docker image, a **Vagrantfile** for local development, and **shell scripts** for easy startup of container taks. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
-
-**Base image:** [scratch][docker_hub_base_image]
+This repository contains a **Dockerfiles** for Arch Linux docker images. This repository is a part of an automated build, published to the [Docker Hub][docker_hub_repository].
 
 [docker_hub_repository]: https://registry.hub.docker.com/u/gainmaster/archlinux/
-[docker_hub_base_image]: https://registry.hub.docker.com/_/scratch/
 
-## Resources
+## Docker Hub repository tags
 
-These resources have been helpful when creating this repository:
+`ganmaster/archlinux` provides multiple tagged images:
+
+* `latest` : Alias to `base`
+* `base` : Arch Linux pacstraped with base group
+* `base-devel` : Arch Linux pacstraped with base-devel group
+
+## Refrences
+
+These refrences have been helpful when creating this repository:
 
 * [jprjr's Github repository with an Arch Linux Docker image][github_repository_jprjr_docker_archlinux]
 * [dotCloud's script for making an Arch Linux image][github_docker_docker_contrib_mkimage_arch]

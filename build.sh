@@ -51,7 +51,7 @@ function test {
         exit 2
     fi
 
-    $SCRIPT_DIRECTORY/utility/bats.sh test/archlinux-base.bats
+    # $SCRIPT_DIRECTORY/utility/bats.sh test/archlinux-base.bats
 }
 
 function run {
