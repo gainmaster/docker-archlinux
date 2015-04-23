@@ -14,6 +14,6 @@ for package in ${@}; do
     curl https://aur.archlinux.org/packages/${package:0:2}/$package/$package.tar.gz | tar xz
     cd $package
     makepkg $package --skippgpcheck
-    mv ${package}*.pkg.tar.xz ${package}.pkg.tar.xz
+    mv ${package}*.pkg.tar.xz ../${package}.pkg.tar.xz
     cd $AUR_BUILD_DIRECTORY && rm -Rf $package
 done
