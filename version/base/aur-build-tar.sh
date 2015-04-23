@@ -3,7 +3,7 @@
 SCRIPT_DIRECTORY=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 
 if [[ $EUID -eq 0 ]]; then
-	runuser -l admin -c "$SCRIPT_DIRECTORY/aur-make-tar $@"
+	runuser -l admin -c "$SCRIPT_DIRECTORY/aur-build-tar $@"
     exit 0
 fi
 
