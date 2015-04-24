@@ -13,7 +13,7 @@ for package in ${@}; do
     cd $AUR_BUILD_DIRECTORY
     curl https://aur.archlinux.org/packages/${package:0:2}/$package/$package.tar.gz | tar xz
     cd $package
-    makepkg $package --skippgpcheck
+    makepkg $package -s --skippgpcheck
     mv ${package}*.pkg.tar.xz ../${package}.pkg.tar.xz
     cd $AUR_BUILD_DIRECTORY && rm -Rf $package
 done
