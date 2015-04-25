@@ -5,7 +5,7 @@ SCRIPT_DIRECTORY=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 BUILD_DIRECTORY=${AUR_BUILD_DIRECTORY:-/tmp}
 
 if [[ $EUID -eq 0 ]]; then
-	runuser -l admin -c "$SCRIPT_DIRECTORY/aur-build-tar $@"
+	runuser -l admin -c "cd $WORKING_DIRECTORY && $SCRIPT_DIRECTORY/aur-build-tar $@"
     exit 0
 fi
 
